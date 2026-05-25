@@ -698,6 +698,10 @@ function CoordinatorView() {
   const [allEvaluations, setAllEvaluations] = useState<EvaluationRecord[]>([]);
   const [expandedEvaluator, setExpandedEvaluator] = useState<string | null>(null);
 
+  // Clear evaluations
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [clearing, setClearing] = useState(false);
+
   // ── Fetchers ──
 
   const fetchRanking = useCallback(async () => {
@@ -851,6 +855,25 @@ function CoordinatorView() {
       fetchEvaluators();
     } catch {
       toast.error("Erro ao cadastrar avaliador.");
+    }
+  };
+
+  const handleClearEvaluations = async () => {
+    setClearing(true);
+    try {
+      const res = await fetch(`${API_BASE}/evaluations`, {
+        method: "DELETE",
+        headers: API_HEADERS,
+      });
+      if (!res.ok) throw new Error();
+      setShowClearConfirm(false);
+      setAllEvaluations([]);
+      setRanking([]);
+      toast.success("Todas as avaliações foram removidas.");
+    } catch {
+      toast.error("Erro ao limpar avaliações.");
+    } finally {
+      setClearing(false);
     }
   };
 
@@ -1404,6 +1427,38 @@ function CoordinatorView() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+      {showClearConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                <Trash2 className="w-8 h-8 text-red-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Limpar Avaliações?</h2>
+              <p className="text-gray-600">
+                Todas as avaliações registradas serão permanentemente removidas. Esta ação não pode ser desfeita.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <button
+                onClick={handleClearEvaluations}
+                disabled={clearing}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-all disabled:opacity-60"
+              >
+                {clearing ? "Limpando..." : "Confirmar — Remover Tudo"}
+              </button>
+              <button
+                onClick={() => setShowClearConfirm(false)}
+                disabled={clearing}
+                className="w-full text-gray-600 py-2 hover:text-gray-900 disabled:opacity-60"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 flex items-center justify-between">
           <div>
@@ -1412,9 +1467,17 @@ function CoordinatorView() {
               {activeTab === "dashboard" ? "Resultados em tempo real · Atualiza a cada 5s" : ""}
             </p>
           </div>
-          <button onClick={() => navigate("/")} className="px-4 py-2 text-gray-600 hover:text-gray-900">
-            Voltar
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowClearConfirm(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition-all text-sm"
+            >
+              <Trash2 className="w-4 h-4" /> Limpar Avaliações
+            </button>
+            <button onClick={() => navigate("/")} className="px-4 py-2 text-gray-600 hover:text-gray-900">
+              Voltar
+            </button>
+          </div>
         </div>
 
         {/* Tab bar */}

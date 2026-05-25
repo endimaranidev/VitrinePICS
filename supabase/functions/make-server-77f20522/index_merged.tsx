@@ -140,6 +140,11 @@ app.get(`${P}/evaluations`, async (c) => {
   const evaluations = await kvGetByPrefix("evaluation:");
   return c.json({ evaluations });
 });
+app.delete(`${P}/evaluations`, async (c) => {
+  const { error } = await kvClient().from(TABLE).delete().like("key", "evaluation:%");
+  if (error) return c.json({ error: error.message }, 500);
+  return c.json({ success: true });
+});
 app.get(`${P}/evaluations/by-evaluator/:username`, async (c) => {
   const username = decodeURIComponent(c.req.param("username"));
   const evaluations = await kvGetByPrefix(`evaluation:${username}:`);
