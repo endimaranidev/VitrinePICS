@@ -131,9 +131,9 @@ function ScoreSlider({
 }) {
   return (
     <div className="space-y-2">
-      <div className="flex justify-between items-center">
-        <label className="text-sm font-medium text-gray-700">{label}</label>
-        <span className={`text-xl font-bold ${scoreColorText(value)}`}>{value.toFixed(1)}</span>
+      <div className="flex justify-between items-start gap-2">
+        <label className="text-sm font-medium text-gray-700 leading-snug">{label}</label>
+        <span className={`text-xl font-bold shrink-0 ${scoreColorText(value)}`}>{value.toFixed(1)}</span>
       </div>
       <Slider.Root
         className={`relative flex items-center select-none w-full h-5 ${disabled ? "opacity-60 pointer-events-none" : ""}`}
@@ -164,12 +164,12 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-6">
       <div className="max-w-2xl w-full">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mb-6">
-            <Trophy className="w-10 h-10 text-white" />
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mb-5 sm:mb-6">
+            <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">Vitrine do PICS</h1>
-          <p className="text-xl text-gray-600">Sistema de Avaliação de Pitches</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Vitrine do PICS</h1>
+          <p className="text-lg sm:text-xl text-gray-600">Sistema de Avaliação de Pitches</p>
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           <button
@@ -352,13 +352,13 @@ function EvaluatorView() {
   // ── Login ──
   if (!evaluator) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
               <Users className="w-8 h-8 text-blue-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Identificação</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Identificação</h2>
             <p className="text-gray-600">Entre com suas credenciais para avaliar</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-5">
@@ -403,12 +403,12 @@ function EvaluatorView() {
   // ── Success ──
   if (showSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
             <CheckCircle2 className="w-12 h-12 text-green-600" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-3">Avaliação Registrada!</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Avaliação Registrada!</h2>
           <p className="text-gray-600 mb-2">
             Equipe: <span className="font-semibold">{selectedTeam}</span>
           </p>
@@ -466,11 +466,11 @@ function EvaluatorView() {
             </div>
           </div>
         )}
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-8 flex items-center justify-between">
+            <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-1">Selecione a Equipe</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Selecione a Equipe</h1>
                 <p className="text-gray-600">
                   Avaliador: <span className="font-semibold">{evaluator.name}</span>
                   {evaluatedCount > 0 && (
@@ -480,16 +480,16 @@ function EvaluatorView() {
                   )}
                 </p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
                 {!isFinalized && evaluatedCount > 0 && (
                   <button
                     onClick={() => setShowFinalizeConfirm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition-all text-sm"
                   >
                     <Lock className="w-4 h-4" /> Finalizar Avaliações
                   </button>
                 )}
-                <button onClick={() => navigate("/")} className="px-4 py-2 text-gray-600 hover:text-gray-900">
+                <button onClick={() => navigate("/")} className="px-4 py-2 text-gray-600 hover:text-gray-900 text-sm">
                   Sair
                 </button>
               </div>
@@ -591,17 +591,17 @@ function EvaluatorView() {
   const isEditing = !!myEvaluations[selectedTeam];
   const isFinalized = !!evaluator.finalized;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <button
             onClick={() => setSelectedTeam(null)}
-            className="text-blue-600 hover:text-blue-700 mb-4 flex items-center"
+            className="text-blue-600 hover:text-blue-700 mb-4 flex items-center text-sm sm:text-base"
           >
             ← Voltar às equipes
           </button>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-xl sm:text-3xl font-bold text-gray-900">
               {isFinalized ? "Visualizando" : isEditing ? "Editando" : "Avaliando"}: {selectedTeam}
             </h1>
             {isFinalized ? (
@@ -619,7 +619,7 @@ function EvaluatorView() {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+        <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 space-y-6">
           {CRITERIA.map((cr) => (
             <ScoreSlider
               key={cr.id}
@@ -893,13 +893,13 @@ function CoordinatorView() {
   // ── Login screen ──
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
               <Lock className="w-8 h-8 text-purple-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Coordenação</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Coordenação</h2>
             <p className="text-gray-600">Acesso restrito — informe suas credenciais</p>
           </div>
           <form onSubmit={handleCoordLogin} className="space-y-5">
@@ -1138,7 +1138,7 @@ function CoordinatorView() {
           </div>
           <button
             type="submit"
-            className="flex items-center gap-2 px-5 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
           >
             <UserPlus className="w-4 h-4" /> Cadastrar Avaliador
           </button>
@@ -1426,7 +1426,7 @@ function CoordinatorView() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 sm:p-6">
       {showClearConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6">
           <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
@@ -1460,33 +1460,33 @@ function CoordinatorView() {
       )}
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-1">Dashboard de Coordenação</h1>
-            <p className="text-gray-600">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Dashboard de Coordenação</h1>
+            <p className="text-gray-600 text-sm sm:text-base">
               {activeTab === "dashboard" ? "Resultados em tempo real · Atualiza a cada 5s" : ""}
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 flex-wrap shrink-0">
             <button
               onClick={() => setShowClearConfirm(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition-all text-sm"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition-all text-sm"
             >
               <Trash2 className="w-4 h-4" /> Limpar Avaliações
             </button>
-            <button onClick={() => navigate("/")} className="px-4 py-2 text-gray-600 hover:text-gray-900">
+            <button onClick={() => navigate("/")} className="px-3 sm:px-4 py-2 text-gray-600 hover:text-gray-900 text-sm">
               Voltar
             </button>
           </div>
         </div>
 
         {/* Tab bar */}
-        <div className="flex gap-2 mb-8 bg-white rounded-xl p-1 shadow-sm w-fit">
+        <div className="flex gap-1 mb-6 sm:mb-8 bg-white rounded-xl p-1 shadow-sm overflow-x-auto">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm whitespace-nowrap transition-all ${
                 activeTab === tab.id
                   ? "bg-purple-600 text-white shadow"
                   : "text-gray-600 hover:bg-gray-100"
