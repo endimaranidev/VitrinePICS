@@ -9,6 +9,7 @@ import {
 import {
   Trophy, ChevronRight, CheckCircle2, Users, Star, TrendingUp,
   Lock, Plus, Trash2, Edit2, UserPlus, ChevronDown, ChevronUp,
+  Moon, Sun,
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { projectId, publicAnonKey } from "/utils/supabase/info";
@@ -142,7 +143,7 @@ function ScoreSlider({
         max={10} min={0} step={0.5}
         disabled={disabled}
       >
-        <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
+        <Slider.Track className="bg-gray-200 dark:bg-gray-600 relative grow rounded-full h-2">
           <Slider.Range className={`absolute ${scoreColor(value)} rounded-full h-full transition-colors`} />
         </Slider.Track>
         <Slider.Thumb
@@ -162,7 +163,7 @@ function ScoreSlider({
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center p-6">
       <div className="max-w-2xl w-full">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mb-5 sm:mb-6">
@@ -174,7 +175,7 @@ function Home() {
         <div className="grid md:grid-cols-2 gap-6">
           <button
             onClick={() => navigate("/evaluator")}
-            className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500"
+            className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400"
           >
             <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 mx-auto group-hover:bg-blue-200 transition-colors">
               <Star className="w-8 h-8 text-blue-600" />
@@ -189,7 +190,7 @@ function Home() {
 
           <button
             onClick={() => navigate("/coordinator")}
-            className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border-2 border-transparent hover:border-purple-500"
+            className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border-2 border-transparent hover:border-purple-500 dark:hover:border-purple-400"
           >
             <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4 mx-auto group-hover:bg-purple-200 transition-colors">
               <TrendingUp className="w-8 h-8 text-purple-600" />
@@ -352,11 +353,11 @@ function EvaluatorView() {
   // ── Login ──
   if (!evaluator) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4 sm:p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-950 dark:to-gray-900 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-              <Users className="w-8 h-8 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-full mb-4">
+              <Users className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Identificação</h2>
             <p className="text-gray-600">Entre com suas credenciais para avaliar</p>
@@ -403,8 +404,8 @@ function EvaluatorView() {
   // ── Success ──
   if (showSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 sm:p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 text-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-950 dark:to-gray-900 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
             <CheckCircle2 className="w-12 h-12 text-green-600" />
           </div>
@@ -437,10 +438,10 @@ function EvaluatorView() {
       <>
         {showFinalizeConfirm && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6">
-            <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full">
               <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-                  <Lock className="w-8 h-8 text-red-600" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900/40 rounded-full mb-4">
+                  <Lock className="w-8 h-8 text-red-600 dark:text-red-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Finalizar Avaliações?</h2>
                 <p className="text-gray-600">
@@ -466,7 +467,7 @@ function EvaluatorView() {
             </div>
           </div>
         )}
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-950 dark:to-gray-900 p-4 sm:p-6">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
@@ -503,7 +504,7 @@ function EvaluatorView() {
             )}
 
             {teams.length === 0 ? (
-              <div className="bg-white rounded-xl p-10 text-center text-gray-500 shadow">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-10 text-center text-gray-500 shadow">
                 Nenhuma equipe cadastrada. Aguarde o coordenador.
               </div>
             ) : (
@@ -526,7 +527,7 @@ function EvaluatorView() {
                         key={team.teamName}
                         onClick={() => handleSelectTeam(team.teamName)}
                         disabled={isFinalized && !done}
-                        className={`group bg-white rounded-xl p-6 shadow-md transition-all border-2 text-left ${
+                        className={`group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md transition-all border-2 text-left ${
                           isFinalized && !done
                             ? "border-transparent opacity-50 cursor-not-allowed"
                             : done
@@ -591,7 +592,7 @@ function EvaluatorView() {
   const isEditing = !!myEvaluations[selectedTeam];
   const isFinalized = !!evaluator.finalized;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-950 dark:to-gray-900 p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
         <div className="mb-6 sm:mb-8">
           <button
@@ -619,7 +620,7 @@ function EvaluatorView() {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 space-y-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-5 sm:p-8 space-y-6">
           {CRITERIA.map((cr) => (
             <ScoreSlider
               key={cr.id}
@@ -893,11 +894,11 @@ function CoordinatorView() {
   // ── Login screen ──
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4 sm:p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-950 dark:to-gray-900 flex items-center justify-center p-4 sm:p-6">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-              <Lock className="w-8 h-8 text-purple-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 dark:bg-purple-900/40 rounded-full mb-4">
+              <Lock className="w-8 h-8 text-purple-600 dark:text-purple-400" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Coordenação</h2>
             <p className="text-gray-600">Acesso restrito — informe suas credenciais</p>
@@ -943,7 +944,7 @@ function CoordinatorView() {
   // ── Tab: Teams ──
   const teamsTab = (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-xl p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Cadastrar Nova Equipe</h2>
         <form onSubmit={handleAddTeam} className="space-y-4">
           <div className="flex gap-3">
@@ -992,7 +993,7 @@ function CoordinatorView() {
         </form>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-xl p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">
           Equipes Cadastradas ({teams.length})
         </h2>
@@ -1003,7 +1004,7 @@ function CoordinatorView() {
         ) : (
           <ul className="space-y-3">
             {teams.map((team) => (
-              <li key={team.teamName} className="bg-gray-50 rounded-xl overflow-hidden">
+              <li key={team.teamName} className="bg-gray-50 dark:bg-gray-700/60 rounded-xl overflow-hidden">
                 {editingTeam === team.teamName ? (
                   <div className="p-4 space-y-3">
                     <p className="font-bold text-gray-900">{team.teamName}</p>
@@ -1098,7 +1099,7 @@ function CoordinatorView() {
   // ── Tab: Evaluators ──
   const evaluatorsTab = (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-xl p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Cadastrar Avaliador</h2>
         <form onSubmit={handleAddEvaluator} className="space-y-4">
           <div className="grid md:grid-cols-3 gap-4">
@@ -1145,7 +1146,7 @@ function CoordinatorView() {
         </form>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-xl p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">
           Avaliadores Cadastrados ({evaluators.length})
         </h2>
@@ -1156,7 +1157,7 @@ function CoordinatorView() {
         ) : (
           <ul className="space-y-2">
             {evaluators.map((ev) => (
-              <li key={ev.username} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+              <li key={ev.username} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/60 rounded-xl">
                 <div>
                   <p className="font-medium text-gray-800">{ev.name}</p>
                   <p className="text-sm text-gray-500">@{ev.username}</p>
@@ -1185,7 +1186,7 @@ function CoordinatorView() {
   const byEvaluatorTab = (
     <div className="space-y-4">
       {Object.keys(byEvaluatorMap).length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-xl p-10 text-center text-gray-500">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-10 text-center text-gray-500">
           Nenhuma avaliação registrada ainda.
         </div>
       ) : (
@@ -1194,10 +1195,10 @@ function CoordinatorView() {
           const displayName = evInfo?.name || uname;
           const isExpanded = expandedEvaluator === uname;
           return (
-            <div key={uname} className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div key={uname} className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
               <button
                 onClick={() => setExpandedEvaluator(isExpanded ? null : uname)}
-                className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
@@ -1227,7 +1228,7 @@ function CoordinatorView() {
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                         {CRITERIA.map((cr) => (
-                          <div key={cr.id} className="bg-gray-50 rounded-lg p-3">
+                          <div key={cr.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
                             <p className="text-xs text-gray-500 mb-1">{cr.name}</p>
                             <p className={`text-base font-bold ${scoreColorText(ev.scores[cr.id as keyof Scores])}`}>
                               {ev.scores[cr.id as keyof Scores].toFixed(1)}
@@ -1303,7 +1304,7 @@ function CoordinatorView() {
 
       {/* Charts */}
       <div className="grid lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl shadow-xl p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Ranking Geral</h2>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData} layout="vertical">
@@ -1316,7 +1317,7 @@ function CoordinatorView() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Desempenho por Critério (Top 5)</h2>
           <ResponsiveContainer width="100%" height={400}>
             <RadarChart data={radarData}>
@@ -1340,20 +1341,20 @@ function CoordinatorView() {
       </div>
 
       {/* Stats */}
-      <div className="bg-white rounded-2xl shadow-xl p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Estatísticas Gerais</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-blue-50 rounded-lg p-4">
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
             <p className="text-sm text-blue-600 font-semibold mb-1">Total de Equipes</p>
             <p className="text-3xl font-bold text-blue-900">{ranking.length}</p>
           </div>
-          <div className="bg-purple-50 rounded-lg p-4">
+          <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
             <p className="text-sm text-purple-600 font-semibold mb-1">Total de Avaliações</p>
             <p className="text-3xl font-bold text-purple-900">
               {ranking.reduce((s, i) => s + i.evaluationCount, 0)}
             </p>
           </div>
-          <div className="bg-green-50 rounded-lg p-4">
+          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
             <p className="text-sm text-green-600 font-semibold mb-1">Média Geral</p>
             <p className="text-3xl font-bold text-green-900">
               {ranking.length > 0
@@ -1361,7 +1362,7 @@ function CoordinatorView() {
                 : "0.00"}
             </p>
           </div>
-          <div className="bg-yellow-50 rounded-lg p-4">
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
             <p className="text-sm text-yellow-600 font-semibold mb-1">Maior Nota</p>
             <p className="text-3xl font-bold text-yellow-900">
               {ranking.length > 0 ? ranking[0].averageScore.toFixed(2) : "0.00"}
@@ -1372,13 +1373,13 @@ function CoordinatorView() {
 
       {/* Full ranking table */}
       {ranking.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-xl p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Ranking Completo</h2>
           <div className="space-y-3">
             {ranking.map((item, index) => (
               <div
                 key={item.teamName}
-                className={`rounded-xl p-5 ${index < 3 ? "border-2 border-yellow-300 bg-yellow-50/30" : "bg-gray-50"}`}
+                className={`rounded-xl p-5 ${index < 3 ? "border-2 border-yellow-300 bg-yellow-50/30 dark:bg-yellow-900/10" : "bg-gray-50 dark:bg-gray-700/60"}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -1401,7 +1402,7 @@ function CoordinatorView() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {CRITERIA.map((cr) => (
-                    <div key={cr.id} className="bg-white rounded-lg p-2">
+                    <div key={cr.id} className="bg-white dark:bg-gray-700 rounded-lg p-2">
                       <p className="text-xs text-gray-500">{cr.name}</p>
                       <p className={`text-sm font-bold ${scoreColorText(item.criteriaAverages[cr.id as keyof Scores] || 0)}`}>
                         {(item.criteriaAverages[cr.id as keyof Scores] || 0).toFixed(1)}
@@ -1426,10 +1427,10 @@ function CoordinatorView() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-950 dark:to-gray-900 p-4 sm:p-6">
       {showClearConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full">
             <div className="text-center mb-6">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
                 <Trash2 className="w-8 h-8 text-red-600" />
@@ -1481,7 +1482,7 @@ function CoordinatorView() {
         </div>
 
         {/* Tab bar */}
-        <div className="flex gap-1 mb-6 sm:mb-8 bg-white rounded-xl p-1 shadow-sm overflow-x-auto">
+        <div className="flex gap-1 mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm overflow-x-auto">
           {TABS.map((tab) => (
             <button
               key={tab.id}
@@ -1489,7 +1490,7 @@ function CoordinatorView() {
               className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm whitespace-nowrap transition-all ${
                 activeTab === tab.id
                   ? "bg-purple-600 text-white shadow"
-                  : "text-gray-600 hover:bg-gray-100"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
             >
               {tab.label}
@@ -1509,14 +1510,28 @@ function CoordinatorView() {
 // ─── App ─────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("vitrine-theme") === "dark");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    localStorage.setItem("vitrine-theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
   return (
     <BrowserRouter>
       <Toaster position="top-right" richColors />
       <Routes>
-        <Route path="/"           element={<Home />} />
-        <Route path="/evaluator"  element={<EvaluatorView />} />
+        <Route path="/"            element={<Home />} />
+        <Route path="/evaluator"   element={<EvaluatorView />} />
         <Route path="/coordinator" element={<CoordinatorView />} />
       </Routes>
+      <button
+        onClick={() => setIsDark((d) => !d)}
+        aria-label="Alternar modo escuro"
+        className="fixed bottom-5 right-5 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-yellow-400 hover:scale-110 transition-transform"
+      >
+        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      </button>
     </BrowserRouter>
   );
 }
