@@ -1510,7 +1510,11 @@ function CoordinatorView() {
 // ─── App ─────────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [isDark, setIsDark] = useState(() => localStorage.getItem("vitrine-theme") === "dark");
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem("vitrine-theme");
+    if (saved) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
